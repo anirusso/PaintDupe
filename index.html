@@ -1,60 +1,97 @@
-<!--index.html-->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Drawing App</title>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css">
-        <link rel="stylesheet" href="styling.css">
-    </head>	
 
-    <body>
-        <!--title-->
-        <div id="header">Drawing App</div>
-        
-        <!--title-->
-        <div class="inputContainer">
-            <!--color-->
-            <div class="input" id="colorInput">
-                <input type="color" list id="paintColor">
-            </div>
-            
-            <!--size-->
-            <div class="input" id="thicknessInput">
-                <div id="circle"></div>
-            </div>
-            <div class="input">
-                <div id="slider"></div>
-            </div>
+<head>
+  <meta charset="utf-8">
+  <title>paintdupe</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=yes">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css">
+  <link rel="stylesheet" href="styling.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!--header-->
+    <div class=header>
+      <span id="file">File</span>
+      <span id="edit">Edit</span>
+      <span id="save">Save</span>
+      <span id="remove">Remove</span>
+      <span id="reset">Reset</span>
+      <span id="selectColor">
+        <label for="hidden">Color</label>
+          <input type="color" value="#1dbbce" id="hidden">
+      </span>
+    </div>
+
+    <div class="page-content">
+
+      <!--sidebar-->
+      <div class="left-column">
+        <!--size-->
+        <div class="input" id="thicknessInput">
+          <div id="circle"></div>
         </div>
-        
-        <!--canvas container-->
+        <div class="input">
+          <div id="slider"></div>
+        </div>
+        <!--paint types-->
+        <div id="type">
+          <span id="erase">Eraser</span>
+          <span id="fill">Fill</span>
+          <span id="pencil">Pencil</span>
+          <span id="pen">Pen</span>
+        </div>
+
+      </div>
+
+      <!--main-->
+      <main class="right-column">
         <div id="container">
-            <canvas id="paint" width="500px" height="400px"></canvas>
+          <canvas id="paint" width="500px" height="400px"></canvas>
         </div>
-        
-        <!--buttons-->
-        <div class="inputContainer2">
-            <!--Erase-->
-            <div class="input2">
-                <span id="erase" class="button">Erase</span>
-            </div>
-            
-            <!--Save-->
-            <div class="input2">
-                <span id="save" class="button">Save</span>
-            </div>
-            
-            <!--Reset-->
-            <div class="input2">
-                <span id="reset" class="button">Reset</span>
-            </div>
-        </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="javascript.js"></script>
-    </body>
+      </main>
 
-</html>
+    </div>
+    <!--footer-->
+    <div class="footer">
+
+      <div class="colorPicker">
+        <div class="chosen" col="black"></div>
+
+        <div class="color" id="white"></div>
+        <div class="color" id="grey"></div>
+        <div class="color" id="darkred"></div>
+        <div class="color" id="darkgoldenrod"></div>
+        <div class="color" id="darkgreen"></div>
+        <div class="color" id="teal"></div>
+        <div class="color" id="darkblue"></div>
+        <div class="color" id="purple"></div>
+        <div class="color" id="cornflowerblue"></div>
+        <div class="color" id="blueviolet"></div>
+        <div class="color" id="sienna"></div>
+
+        <div class="color" id="black"></div>
+        <div class="color" id="darkgrey"></div>
+        <div class="color" id="red"></div>
+        <div class="color" id="yellow"></div>
+        <div class="color" id="lawngreen"></div>
+        <div class="color" id="aqua"></div>
+        <div class="color" id="blue"></div>
+        <div class="color" id="fuchsia"></div>
+        <div class="color" id="palegreen"></div>
+        <div class="color" id="deeppink"></div>
+        <div class="color" id="orange"></div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="javascript.js"></script>
+</body>
