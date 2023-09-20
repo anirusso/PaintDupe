@@ -1,13 +1,12 @@
 $(function() {
-
   $(".colorPicker div").each(function() {
     let text = $(this).attr("id")
     $(this).css("background-color", text)
-  })
+  });
 
-  //cursor = paint or eraser
   var paint = false;
-  var paint_erase = "paint";
+  //tool = pencil, brush, eraser, fill
+  var tool = "pencil";
 
   var canvas = document.getElementById("paint");
   var ctx = canvas.getContext("2d");
@@ -34,6 +33,10 @@ $(function() {
   //click inside container
   container.mousedown(function(e) {
     paint = true;
+    if (tool == "fill") {
+		  fill();
+		  return;
+	  }
     ctx.beginPath();
     mouse.x = e.pageX - this.offsetLeft;
     mouse.y = e.pageY - this.offsetTop;
@@ -45,18 +48,29 @@ $(function() {
     mouse.x = e.pageX - this.offsetLeft;
     mouse.y = e.pageY - this.offsetTop;
     if (paint == true) {
-      if (paint_erase == "paint") {
-        //get color input
-        let color = $(".chosen").attr("col")
-        ctx.strokeStyle = color;
-      } else {
-        //white color
+      if (tool == "eraser") {
+        console.log("sdfsdf")
         ctx.strokeStyle = "white";
       }
-      ctx.lineTo(mouse.x, mouse.y);
-      ctx.stroke();
+      else {
+        let color = $(".chosen").attr("col")
+        ctx.strokeStyle = color;
+        if (tool == "pencil") {
+          ctx.lineWidth = 1;
+        }
+        if (tool == "brush") {
+          ctx.lineWidth = 10;
+        }
+        if (tool == "fill") {
+          fill();
+          return;
+        }
     }
-  });
+    ctx.lineTo(mouse.x, mouse.y);
+    ctx.stroke();
+  }
+});
+
   container.mouseup(function() {
     paint = false;
   });
@@ -80,35 +94,50 @@ $(function() {
   });
 
   $("#erase").click(function() {
-    if (paint_erase == "paint") {
-      paint_erase = "erase";
-    } else {
-      paint_erase = "paint";
-    }
+    tool = "eraser";
     $(this).toggleClass("eraseMode");
+  });
+
+  $("#pencil").click(function() {
+    tool = "pencil"
+  });
+
+  $("#paintbrush").click(function() {
+    tool = "brush"
+  });
+
+  $("#fill").click(function() {
+		tool = "fill"
   });
 
   $(".color").click(function() {
     let color = $(this).attr("id");
     $(".chosen").attr("col", color);
     $(".chosen").css("background-color", color);
-  })
+  });
 
   $("#hidden").change(function() {
     let color = $("#hidden").val();
     $(".chosen").attr("col", color);
     $(".chosen").css("background-color", color);
-  })
+  });
 
   //change lineWidth using slider
-  $("#slider").slider({
+  $('#slider').slider({
     min: 1,
     max: 30,
     slide: function(event, ui) {
-      $("#circle").height(ui.value);
-      $("#circle").width(ui.value);
+      $('#circle').height(ui.value);
+      $('#circle').width(ui.value);
       ctx.lineWidth = ui.value;
     }
   });
+
+  function fill() {
+	  let color = $(".chosen").attr("col")
+	  ctx.strokeStyle = color;
+	  ctx.fillStyle = color;
+	  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
 
 });
