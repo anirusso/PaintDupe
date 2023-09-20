@@ -12,18 +12,18 @@ html, body {
   width: 100%;
 }
 
-span {
+label {
+  cursor: pointer;
+}
+
+.header span {
   margin-right: 2px;
   padding: 2px;
   cursor: pointer;
   border: 1px solid transparent;
 }
 
-label {
-  cursor: pointer;
-}
-
-span:hover {
+.header span:hover {
   border-top: 1px solid white;
   border-left: 1px solid white;
   border-right: 1px solid grey;
@@ -63,9 +63,22 @@ span:hover {
 }
 
 .left-column {
-  width: 100px;
+  width: 60px;
   flex-shrink: 0;
   height: 95vh;
+}
+
+.left-column span {
+  display: inline-block;
+  margin-left: 1px;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border-right: 1px solid rgb(33,33,33);
+  border-bottom: 1px solid rgb(33,33,33);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  box-shadow: 1px 1px black;
 }
 
 .right-column {
@@ -146,7 +159,11 @@ span:hover {
   position: relative;
 }
 
-.eraseMode {
-  background-color: lightgrey;
-  color: white;
+.active {
+  background-color: rgb(220,220,220);
+  border-top: 1px solid rgb(150,150,150) !important;
+  border-left: 1px solid rgb(150,150,150) !important;
+  border-right: 1px solid rgb(220,220,220)  !important;
+  border-bottom: 1px solid rgb(220,220,220) !important;
+  box-shadow: 1px 1px white !important;
 }

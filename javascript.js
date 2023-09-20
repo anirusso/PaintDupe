@@ -5,7 +5,7 @@ $(function() {
   });
 
   var paint = false;
-  //tool = pencil, brush, eraser, fill
+  //tool = pencil, paintbrush, eraser, fill
   var tool = "pencil";
 
   var canvas = document.getElementById("paint");
@@ -49,7 +49,6 @@ $(function() {
     mouse.y = e.pageY - this.offsetTop;
     if (paint == true) {
       if (tool == "eraser") {
-        console.log("sdfsdf")
         ctx.strokeStyle = "white";
       }
       else {
@@ -58,7 +57,7 @@ $(function() {
         if (tool == "pencil") {
           ctx.lineWidth = 1;
         }
-        if (tool == "brush") {
+        if (tool == "paintbrush") {
           ctx.lineWidth = 10;
         }
         if (tool == "fill") {
@@ -81,8 +80,6 @@ $(function() {
 
   $("#reset").click(function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    paint_erase = "paint";
-    $("#erase").removeClass("eraseMode");
   });
 
   $("#save").click(function() {
@@ -93,22 +90,34 @@ $(function() {
     }
   });
 
-  $("#erase").click(function() {
+  $("#eraser").click(function() {
+    var active = "#" + tool
+    $(active).removeClass("active");
     tool = "eraser";
-    $(this).toggleClass("eraseMode");
+    $(this).toggleClass("active");
   });
 
   $("#pencil").click(function() {
+    var active = "#" + tool
+    $(active).removeClass("active");
     tool = "pencil"
+    $(this).toggleClass("active");
   });
 
   $("#paintbrush").click(function() {
-    tool = "brush"
+    var active = "#" + tool
+    $(active).removeClass("active");
+    tool = "paintbrush"
+    $(this).toggleClass("active");
   });
 
   $("#fill").click(function() {
+    var active = "#" + tool
+    $(active).removeClass("active");
 		tool = "fill"
+    $(this).toggleClass("active");
   });
+
 
   $(".color").click(function() {
     let color = $(this).attr("id");
