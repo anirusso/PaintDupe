@@ -7,6 +7,9 @@ $(function() {
   var paint = false;
   //tool = pencil, paintbrush, eraser, fill
   var tool = "pencil";
+  //size = small, medium, large, xlarge
+  var size = "small"
+  $("#small").toggleClass("size-active");
 
   var canvas = document.getElementById("paint");
   var ctx = canvas.getContext("2d");
@@ -54,12 +57,6 @@ $(function() {
       else {
         let color = $(".chosen").attr("col")
         ctx.strokeStyle = color;
-        if (tool == "pencil") {
-          ctx.lineWidth = 1;
-        }
-        if (tool == "paintbrush") {
-          ctx.lineWidth = 10;
-        }
         if (tool == "fill") {
           fill();
           return;
@@ -116,8 +113,9 @@ $(function() {
     $(active).removeClass("active");
 		tool = "fill"
     $(this).toggleClass("active");
+    var s = "#" + size
+    $(s).removeClass("size-active");
   });
-
 
   $(".color").click(function() {
     let color = $(this).attr("id");
@@ -131,15 +129,38 @@ $(function() {
     $(".chosen").css("background-color", color);
   });
 
-  //change lineWidth using slider
-  $('#slider').slider({
-    min: 1,
-    max: 30,
-    slide: function(event, ui) {
-      $('#circle').height(ui.value);
-      $('#circle').width(ui.value);
-      ctx.lineWidth = ui.value;
-    }
+//change brush sizes
+
+  $("#small").click(function() {
+    ctx.lineWidth = 1;
+    var active = "#" + size
+    $(active).removeClass("size-active");
+    $(this).toggleClass("size-active");
+    size = "small"
+  });
+
+  $("#medium").click(function() {
+    ctx.lineWidth = 5;
+    var active = "#" + size
+    $(active).removeClass("size-active");
+    $(this).toggleClass("size-active");
+    size = "medium"
+  });
+
+  $("#large").click(function() {
+    ctx.lineWidth = 10;
+    var active = "#" + size
+    $(active).removeClass("size-active");
+    $(this).toggleClass("size-active");
+    size = "large"
+  });
+
+  $("#xlarge").click(function() {
+    ctx.lineWidth = 15;
+    var active = "#" + size
+    $(active).removeClass("size-active");
+    $(this).toggleClass("size-active");
+    size = "xlarge"
   });
 
   function fill() {
