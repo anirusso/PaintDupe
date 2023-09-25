@@ -29,9 +29,8 @@ $(function() {
     img.src = localStorage.getItem("imgCanvas");
   };
   //set drawing parameters (lineWidth, lineJoin, lineCap)
-  ctx.lineWidth = 1;
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
+
+
 
   //click inside container
   container.mousedown(function(e) {
@@ -40,6 +39,14 @@ $(function() {
 		  fill();
 		  return;
 	  }
+    if (tool == "paintbrush") {
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+    }
+    else {
+      ctx.lineJoin = "square";
+      ctx.lineCap = "square";
+    }
     ctx.beginPath();
     mouse.x = e.pageX - this.offsetLeft;
     mouse.y = e.pageY - this.offsetTop;
@@ -92,6 +99,8 @@ $(function() {
     $(active).removeClass("active");
     tool = "eraser";
     $(this).toggleClass("active");
+    $(".sizes").css("visibility", "visible");
+    $(".size-list div").css("border-radius", "0");
   });
 
   $("#pencil").click(function() {
@@ -99,6 +108,8 @@ $(function() {
     $(active).removeClass("active");
     tool = "pencil"
     $(this).toggleClass("active");
+    $(".sizes").css("visibility", "visible");
+    $(".size-list div").css("border-radius", "0");
   });
 
   $("#paintbrush").click(function() {
@@ -106,6 +117,8 @@ $(function() {
     $(active).removeClass("active");
     tool = "paintbrush"
     $(this).toggleClass("active");
+    $(".sizes").css("visibility", "visible");
+    $(".size-list div").css("border-radius", "50%");
   });
 
   $("#fill").click(function() {
@@ -115,6 +128,7 @@ $(function() {
     $(this).toggleClass("active");
     var s = "#" + size
     $(s).removeClass("size-active");
+    $(".sizes").css("visibility", "hidden");
   });
 
   $(".color").click(function() {
